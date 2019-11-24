@@ -3,6 +3,7 @@
 int main()
 {
     char input ='X';
+    int ch;
     double amount = 0.0;
     int id = -1;
     init();
@@ -50,6 +51,7 @@ int main()
         }
         printf("Transaction type?:");
         scanf(" %c", &input);
+        while( (ch = getchar()) != '\n' && ch != EOF); 
     }
     return 0;
 }

@@ -22,63 +22,85 @@ void newAccount(double amount)
 }
 void getBalance(int id)
 {
+    id = id -901;
+    if(id<0 || id>49)
+    {
+        printf("invalid id");
+        return;
+    }
     if (acc[0][id] == 0.0)
     {
-        printf("closed account /n");
+        printf("closed account \n");
     }
     else
     {
-        printf("Balance: %lf", acc[1][id]);
+        printf("Balance: %lf\n", acc[1][id]);
     }
 }
 void deposit(int id, double amount) {
+    id = id -901;
+    if(id<0 || id>49)
+    {
+        printf("invalid id");
+        return;
+    }
      if (acc[0][id] == 0.0)
     {
-        printf("closed account /n");
+        printf("closed account \n");
     }
     else
     {
         acc[1][id] +=amount;
-        printf("Balance: %lf", acc[1][id]);
+        printf("Balance: %lf\n", acc[1][id]);
     }
 }
 void withdraw(int id, double amount) {
+    id = id -901;
+    if(id<0 || id>49)
+    {
+        printf("invalid id");
+        return;
+    }
      if (acc[0][id] == 0.0)
     {
-        printf("closed account /n");
+        printf("closed account \n");
     }
     else
     {
         if(acc[1][id]-amount > 0)
         {
             acc[1][id] -=amount;
-        printf("Balance: %lf", acc[1][id]);
+        printf("Balance: %lf\n", acc[1][id]);
         }
         else printf("not enough funds");
     }
 }
 void shut(int id) {
-    if(id < 49)
+    if(id-901 < 49)
     {
-       acc[0][id]=0.0;
+       for(int i=id+1;i<nextFree;i++)
+       {
+       acc[1][i]=acc[1][i+1];
+       }
+       acc[0][nextFree-1]=0.0;
+       nextFree--;
     }
     else
     {
-        printf("invalid id");
+        printf("invalid id\n");
     }
     
 }
 void addInterest(double prec) {
         for (int i = 0; i < nextFree; i++)
         {
-            acc[1][i] = acc[1][i]*prec;
+            acc[1][i] = acc[1][i]*(prec) + acc[1][i]*(prec/100);
         }
 }
 void report()
 {
     for (int i = 0; i < nextFree; i++)
     {
-        printf("val acc[1][%d] = %lf", i, acc[1][i]);
-        printf("\n");
+        if (acc[0][i]!=0.0) printf("Account number %d balance: %lf\n", i+901, acc[1][i]);
     }
 }

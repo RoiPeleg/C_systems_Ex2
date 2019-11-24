@@ -1,6 +1,6 @@
 #ifndef MYBANK
 #define MYBANK
-
+void init();//init the array
 void newAccount(double amount);//opens new account with given amount as first deposit
 void getBalance(int id);//gets id and printd it's balance
 void deposit(int id, double amount);//gets amount to deposit and prints new balance
