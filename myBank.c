@@ -22,8 +22,8 @@ void newAccount(double amount)
 }
 void getBalance(int id)
 {
-    id = id -901;
-    if(id<0 || id>49)
+    id = id - 901;
+    if (id < 0 || id > 49)
     {
         printf("invalid id");
         return;
@@ -37,70 +37,80 @@ void getBalance(int id)
         printf("Balance: %lf\n", acc[1][id]);
     }
 }
-void deposit(int id, double amount) {
-    id = id -901;
-    if(id<0 || id>49)
+void deposit(int id, double amount)
+{
+    id = id - 901;
+    if (id < 0 || id > 49)
     {
         printf("invalid id");
         return;
     }
-     if (acc[0][id] == 0.0)
+    if (acc[0][id] == 0.0)
     {
         printf("closed account \n");
     }
     else
     {
-        acc[1][id] +=amount;
+        acc[1][id] += amount;
         printf("Balance: %lf\n", acc[1][id]);
     }
 }
-void withdraw(int id, double amount) {
-    id = id -901;
-    if(id<0 || id>49)
+void withdraw(int id, double amount)
+{
+    id = id - 901;
+    if (id < 0 || id > 49)
     {
         printf("invalid id");
         return;
     }
-     if (acc[0][id] == 0.0)
+    if (acc[0][id] == 0.0)
     {
         printf("closed account \n");
     }
     else
     {
-        if(acc[1][id]-amount > 0)
+        if (acc[1][id] - amount > 0)
         {
-            acc[1][id] -=amount;
-        printf("Balance: %lf\n", acc[1][id]);
+            acc[1][id] -= amount;
+            printf("Balance: %lf\n", acc[1][id]);
         }
-        else printf("not enough funds");
+        else
+            printf("not enough funds");
     }
 }
-void shut(int id) {
-    if(id-901 < 49)
+void shut(int id)
+{
+    if (id - 901 < 49)
     {
-       for(int i=id+1;i<nextFree;i++)
-       {
-       acc[1][i]=acc[1][i+1];
-       }
-       acc[0][nextFree-1]=0.0;
-       nextFree--;
+        if (acc[0][id] == 0.0)
+        {
+            printf("account is aleardy closed");
+            return;
+        }
+        for (int i = id + 1; i < nextFree; i++)
+        {
+            acc[1][i] = acc[1][i + 1];
+        }
+        acc[0][nextFree - 1] = 0.0;
+        nextFree--;
     }
     else
     {
         printf("invalid id\n");
     }
-    
 }
-void addInterest(double prec) {
-        for (int i = 0; i < nextFree; i++)
-        {
-            acc[1][i] = acc[1][i]*(prec) + acc[1][i]*(prec/100);
-        }
+void addInterest(double prec)
+{
+    for (int i = 0; i < nextFree; i++)
+    {
+        acc[1][i] = acc[1][i] * (prec) + acc[1][i] * (prec / 100);
+    }
 }
 void report()
 {
     for (int i = 0; i < nextFree; i++)
     {
-        if (acc[0][i]!=0.0) printf("Account number %d balance: %lf\n", i+901, acc[1][i]);
+        if (acc[0][i] != 0.0)
+            printf("Account number %d balance: %lf\n", i + 901, acc[1][i]);
     }
 }
