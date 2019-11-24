@@ -31,10 +31,49 @@ void getBalance(int id)
         printf("Balance: %lf", acc[1][id]);
     }
 }
-void deposit(int id, double amount) { ; }
-void withdraw(int id, double amount) { ; }
-void shut(int id) { ; }
-void addInterest(double prec) { ; }
+void deposit(int id, double amount) {
+     if (acc[0][id] == 0.0)
+    {
+        printf("closed account /n");
+    }
+    else
+    {
+        acc[1][id] +=amount;
+        printf("Balance: %lf", acc[1][id]);
+    }
+}
+void withdraw(int id, double amount) {
+     if (acc[0][id] == 0.0)
+    {
+        printf("closed account /n");
+    }
+    else
+    {
+        if(acc[1][id]-amount > 0)
+        {
+            acc[1][id] -=amount;
+        printf("Balance: %lf", acc[1][id]);
+        }
+        else printf("not enough funds");
+    }
+}
+void shut(int id) {
+    if(id < 49)
+    {
+       acc[0][id]=0.0;
+    }
+    else
+    {
+        printf("invalid id");
+    }
+    
+}
+void addInterest(double prec) {
+        for (int i = 0; i < nextFree; i++)
+        {
+            acc[1][i] = acc[1][i]*prec;
+        }
+}
 void report()
 {
     for (int i = 0; i < nextFree; i++)
