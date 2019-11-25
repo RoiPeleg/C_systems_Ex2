@@ -1,21 +1,19 @@
 #include "myBank.h"
 #include <stdio.h>
-
-double acc[1][49];
+#define SIZE 49
+double acc[1][SIZE]={0};
 int nextFree = 0;
-void init()
-{
-    for (int i = 0; i < nextFree; i++)
-    {
-        acc[0][i] = 0.0;
-        acc[1][i] = 0.0;
-    }
-}
 void newAccount(double amount)
 {
-    if (nextFree < 49)
+    if (amount <0)
     {
-        acc[0][nextFree] = 1;
+        printf("amount must be positive");
+        return;
+    }
+    
+    if (nextFree < SIZE)
+    {
+        acc[0][nextFree] = 1.0;
         acc[1][nextFree] = amount;
         nextFree++;
     }
@@ -23,9 +21,9 @@ void newAccount(double amount)
 void getBalance(int id)
 {
     id = id - 901;
-    if (id < 0 || id > 49)
+    if (id < 0 || id > SIZE)
     {
-        printf("invalid id");
+        printf("invalid id\n");
         return;
     }
     if (acc[0][id] == 0.0)
@@ -34,15 +32,15 @@ void getBalance(int id)
     }
     else
     {
-        printf("Balance: %lf\n", acc[1][id]);
+        printf("Balance: %.2lf\n", acc[1][id]);
     }
 }
 void deposit(int id, double amount)
 {
     id = id - 901;
-    if (id < 0 || id > 49)
+    if (id < 0 || id > SIZE)
     {
-        printf("invalid id");
+        printf("invalid id\n");
         return;
     }
     if (acc[0][id] == 0.0)
@@ -52,15 +50,15 @@ void deposit(int id, double amount)
     else
     {
         acc[1][id] += amount;
-        printf("Balance: %lf\n", acc[1][id]);
+        printf("Balance: %.2lf\n", acc[1][id]);
     }
 }
 void withdraw(int id, double amount)
 {
     id = id - 901;
-    if (id < 0 || id > 49)
+    if (id < 0 || id > SIZE)
     {
-        printf("invalid id");
+        printf("invalid id\n");
         return;
     }
     if (acc[0][id] == 0.0)
@@ -72,19 +70,19 @@ void withdraw(int id, double amount)
         if (acc[1][id] - amount > 0)
         {
             acc[1][id] -= amount;
-            printf("Balance: %lf\n", acc[1][id]);
+            printf("Balance: %.2lf\n", acc[1][id]);
         }
         else
-            printf("not enough funds");
+            printf("not enough funds \n");
     }
 }
 void shut(int id)
 {
-    if (id - 901 < 49)
+    if (id - 901 < SIZE)
     {
         if (acc[0][id] == 0.0)
         {
-            printf("account is aleardy closed");
+            printf("account is aleardy closed \n");
             return;
         }
         for (int i = id + 1; i < nextFree; i++)
@@ -111,6 +109,6 @@ void report()
     for (int i = 0; i < nextFree; i++)
     {
         if (acc[0][i] != 0.0)
-            printf("Account number %d balance: %lf\n", i + 901, acc[1][i]);
+            printf("Account number %d balance: %.2lf\n", i + 901, acc[1][i]);
     }
 }
