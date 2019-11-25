@@ -9,6 +9,8 @@ int main()
     {
         switch (input)
         {
+        case 'X':
+        break;
         case 'O':
             printf("Initial deposit?:");
             scanf(" %lf", &amount);
@@ -46,6 +48,9 @@ int main()
         case 'P':
             report();
             break;
+        default:
+        printf("invalid input\n");
+        break;
         }
         printf("Transaction type?:");
         scanf(" %c", &input);
