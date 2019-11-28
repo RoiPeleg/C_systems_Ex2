@@ -97,7 +97,7 @@ void shut(int id)
         printf("invalid id\n");
     }
 }
-void addInterest(double prec)
+void addInterest(int prec)
 {
     for (int i = 0; i < nextFree; i++)
     {
