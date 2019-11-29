@@ -8,7 +8,6 @@ int main()
     int intrest = 0;
    do
     {
-        input = 'X';
         printf("Transaction type?:");
         N = scanf(" %c", &input);
         if (N != 1)
@@ -21,11 +20,11 @@ int main()
             {
             case 'O':
                 printf("Initial deposit?:");
-                if (scanf("  %lf", &amount) != 1)
+                if (scanf("%lf", &amount) != 1)
                 {
                     printf("invalid input\n");
-                    continue;
                 }
+                else
                    newAccount(amount);
                 break;
             case 'B':

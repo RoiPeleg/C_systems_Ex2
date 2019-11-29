@@ -1,13 +1,12 @@
 #include "myBank.h"
 #include <stdio.h>
-#define SIZE 49
-double acc[1][SIZE]={0};
+double acc[1][SIZE]={{0.0}};
 int nextFree = 0;
 void newAccount(double amount)
 {
     if (amount <0)
     {
-        printf("amount must be positive");
+        printf("amount must be positive\n");
         return;
     }
     
@@ -43,6 +42,10 @@ void deposit(int id, double amount)
         printf("invalid id\n");
         return;
     }
+    if (amount <= 0)
+    {
+        printf("amount must be positive\n");
+    }
     if (acc[0][id] == 0.0)
     {
         printf("closed account \n");
@@ -55,6 +58,10 @@ void deposit(int id, double amount)
 }
 void withdraw(int id, double amount)
 {
+    if (amount <= 0)
+    {
+        printf("amount must be positive");
+    }
     id = id - 901;
     if (id < 0 || id > SIZE)
     {
@@ -99,9 +106,16 @@ void shut(int id)
 }
 void addInterest(int prec)
 {
+    if (prec<0)
+    {
+        printf("precentege should be more than zero\n");
+        return;
+    }
+    //float p = prec / 100.0;
     for (int i = 0; i < nextFree; i++)
     {
-        acc[1][i] = acc[1][i] * (prec) + acc[1][i] * (prec / 100);
+        if(acc[0][i]==1.0)
+        acc[1][i] =acc[1][i] +(acc[1][i]*prec/100);
     }
 }
 void report()
