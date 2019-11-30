@@ -1,21 +1,27 @@
 #include "myBank.h"
 #include <stdio.h>
-double acc[1][SIZE]={{0.0}};
-int nextFree = 0;
+double acc[rows][SIZE] = {{0.0}};
+int nextFree = 0;//next free spot in the array
 void newAccount(double amount)
 {
-    if (amount <0)
+    if (amount < 0)
     {
         printf("amount must be positive\n");
         return;
     }
-    
+
     if (nextFree < SIZE)
     {
         acc[0][nextFree] = 1.0;
         acc[1][nextFree] = amount;
+        printf("new account id is: %d\n", 901 + nextFree);
         nextFree++;
     }
+    else
+    {
+        printf("max accounts reached\n");
+    }
+    
 }
 void getBalance(int id)
 {
@@ -45,6 +51,7 @@ void deposit(int id, double amount)
     if (amount <= 0)
     {
         printf("amount must be positive\n");
+        return;
     }
     if (acc[0][id] == 0.0)
     {
@@ -60,7 +67,8 @@ void withdraw(int id, double amount)
 {
     if (amount <= 0)
     {
-        printf("amount must be positive");
+        printf("amount must be positive\n");
+        return;
     }
     id = id - 901;
     if (id < 0 || id > SIZE)
@@ -85,7 +93,8 @@ void withdraw(int id, double amount)
 }
 void shut(int id)
 {
-    if (id - 901 < SIZE)
+    id = id - 901;
+    if (id < 0 || id < SIZE)
     {
         if (acc[0][id] == 0.0)
         {
@@ -106,16 +115,18 @@ void shut(int id)
 }
 void addInterest(int prec)
 {
-    if (prec<0)
+    if (prec < 0)
     {
-        printf("precentege should be more than zero\n");
+        printf("precentege should be positive\n");
         return;
     }
-    //float p = prec / 100.0;
+    double p = 1 + (prec / 100);
     for (int i = 0; i < nextFree; i++)
     {
         if(acc[0][i]==1.0)
-        acc[1][i] =acc[1][i] +(acc[1][i]*prec/100);
+        {
+        acc[1][i]=acc[1][i]*p;
+        }
     }
 }
 void report()
@@ -124,5 +135,12 @@ void report()
     {
         if (acc[0][i] != 0.0)
             printf("Account number %d balance: %.2lf\n", i + 901, acc[1][i]);
+    }
+}
+void closeAll()
+{
+    for (int i = 0; i < nextFree; i++)
+    {
+        acc[0][i] = 0.0;
     }
 }

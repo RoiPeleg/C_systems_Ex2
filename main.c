@@ -4,28 +4,29 @@ int main()
 {
     char input = 'X';
     double amount = 0.0;
-    int id = -1,N=0;
+    int id = -1, N = 0;
     int intrest = 0;
-   do
+    do
     {
         printf("Transaction type?:");
         N = scanf(" %c", &input);
         if (N != 1)
         {
             printf("invalid in\n");
-        }  
+        }
         else
         {
             switch (input)
             {
             case 'O':
                 printf("Initial deposit?:");
-                if (scanf("%lf", &amount) != 1)
+                N = scanf("%lf", &amount);
+                if (N != 1)
                 {
                     printf("invalid input\n");
                 }
                 else
-                   newAccount(amount);
+                    newAccount(amount);
                 break;
             case 'B':
                 printf("Account number:");
@@ -88,6 +89,7 @@ int main()
                 report();
                 break;
             case 'E':
+                closeAll();
                 break;
             default:
                 printf("invalid input\n");
