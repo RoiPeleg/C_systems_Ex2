@@ -120,12 +120,11 @@ void addInterest(int prec)
         printf("precentege should be positive\n");
         return;
     }
-    double p = 1 + (prec / 100);
     for (int i = 0; i < sizeof(acc)/sizeof(acc[0]); i++)
     {
         if(acc[0][i]==1.0)
         {
-        acc[1][i]=acc[1][i]*p;
+        acc[1][i]+=acc[1][i]*(prec / 100.0);
         }
     }
 }
