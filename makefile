@@ -7,7 +7,7 @@ all: myBankLib.so OUT
 OUT: $(OBJECTS_MAIN) 
 	$(CC) $(FLAGS) -o OUT $(OBJECTS_MAIN) ./myBankLib.so
 myBankLib.so: $(OBJ) myBank.h
-	$(CC) -shared -fPIC -o myBankLib.so $(OBJ) myBank.h
+	$(CC) -shared -o myBankLib.so $(OBJ) myBank.h
 myBank.o: myBank.c myBank.h
 	$(CC) $(FLAGS) -fPIC -c myBank.c
 main.o: main.c $(OBJ) 

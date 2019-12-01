@@ -13,7 +13,7 @@ void newAccount(double amount)
     if (nextFree < SIZE)
     {
         acc[0][nextFree] = 1.0;
-        acc[1][nextFree] = amount;
+        acc[1][nextFree] = ((int)(amount*100))/100;
         printf("new account id is: %d\n", 901 + nextFree);
         nextFree++;
     }
@@ -59,6 +59,7 @@ void deposit(int id, double amount)
     }
     else
     {
+        amount = ((int)(amount*100))/100;
         acc[1][id] += amount;
         printf("Balance: %.2lf\n", acc[1][id]);
     }
@@ -84,6 +85,7 @@ void withdraw(int id, double amount)
     {
         if (acc[1][id] - amount > 0)
         {
+            amount = ((int)(amount*100))/100;
             acc[1][id] -= amount;
             printf("Balance: %.2lf\n", acc[1][id]);
         }
@@ -125,6 +127,7 @@ void addInterest(int prec)
         if(acc[0][i]==1.0)
         {
         acc[1][i]+=acc[1][i]*(prec / 100.0);
+        acc[1][i] = ((int)(acc[1][i]*100))/100;
         }
     }
 }
