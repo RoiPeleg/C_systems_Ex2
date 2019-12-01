@@ -1,7 +1,7 @@
 #ifndef MYBANK
 #define MYBANK
-#define SIZE 49
-#define rows 1
+#define SIZE 50
+#define rows 2
 extern double acc[rows][SIZE];
 void newAccount(double amount);       //opens new account with given amount as first deposit
 void getBalance(int id);              //gets id and printd it's balance
